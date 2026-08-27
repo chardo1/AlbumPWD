@@ -101,12 +101,4 @@ CREATE TABLE colaboradores (
         ON DELETE CASCADE
 );
 
--- =========================================
--- ÍNDICES ÚTILES
--- =========================================
-CREATE INDEX idx_album_creador ON albumes(id_creador);
-CREATE INDEX idx_hoja_album ON hojas(id_album);
-CREATE INDEX idx_figura_hoja ON figuras(id_hoja);
-CREATE INDEX idx_colaborador_usuario ON colaboradores(id_usuario);
-CREATE INDEX idx_grupo_usuario ON grupos(id_usuario);
 
