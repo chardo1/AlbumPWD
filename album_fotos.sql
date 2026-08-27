@@ -12,7 +12,7 @@ CREATE TABLE usuarios (
     nombre VARCHAR(100) NOT NULL,
     pass VARCHAR(255) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
-    rol ENUM('visitante', 'usuario', 'moderador', 'admin') NOT NULL DEFAULT 'usuario',
+    rol ENUM('visitante', 'usuario', 'moderador', 'admin') NOT NULL DEFAULT 'visitante',
     activo BOOLEAN NOT NULL DEFAULT TRUE
 );
 
@@ -68,12 +68,6 @@ CREATE TABLE figuras (
     titulo VARCHAR(150),
     imagen VARCHAR(255) NOT NULL,
 
-    CONSTRAINT fk_figura_album
-        FOREIGN KEY (id_album)
-        REFERENCES albumes(id_album)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-
     CONSTRAINT fk_figura_hoja
         FOREIGN KEY (id_hoja)
         REFERENCES hojas(id_hoja)
@@ -81,30 +75,6 @@ CREATE TABLE figuras (
         ON DELETE CASCADE,
 
     UNIQUE (id_hoja, orden)
-);
-
--- =========================================
--- GRUPOS
--- Relaciona un usuario con un álbum/grupo.
--- =========================================
-CREATE TABLE grupos (
-    id_grupo INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT NOT NULL,
-    id_album INT NOT NULL,
-
-    CONSTRAINT fk_grupo_usuario
-        FOREIGN KEY (id_usuario)
-        REFERENCES usuarios(id_usuario)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-
-    CONSTRAINT fk_grupo_album
-        FOREIGN KEY (id_album)
-        REFERENCES albumes(id_album)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-
-    UNIQUE (id_usuario, id_album)
 );
 
 -- =========================================
